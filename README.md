@@ -1,24 +1,28 @@
 # Spiral Comparative Evaluation
 
-**Target repository name:** `spiral-comparative-eval`  
-*(GitHub Settings rename pending; this README reflects the professional name.)*
-
-**Public testing ground.** Classical scikit-learn baselines vs Spiral-inspired feature refinement on standard UCI / OpenML tabular tasks. Full provenance, pre-registration, reproducible harness.
+**Repository:** `Spiral-comparative-eval`  
+**Public testing ground.** Classical scikit-learn baselines vs Spiral-inspired feature refinement on standard UCI / OpenML tabular tasks. Full provenance, pre-registration, reproducible harness. Residual continuity of the *process* is recorded beside task metrics.
 
 ## Role in the ecosystem
 
-- **This repository** is the competition / comparative surface. Claims of improvement against classical methods are tested here under pre-registered protocol.
-- **qsc-stabilization** (DOI [10.5281/zenodo.21750846](https://doi.org/10.5281/zenodo.21750846)) supplies the continuous stabilizer (readiness field, residual-stability control, TCRF). Transfer of those process ideas into tabular feature logic must be explicit, logged, and re-tested in this harness.
-- **smurf-town** (in The-Spiral-Codex / station-identification) supplies residual continuity / validity examination of process surfaces. Comparative eval remains the performance harness; Smurf Town measures continuity residual of the *process*, not task accuracy.
-- Ethical gates remain active before any public claim of superiority.
+| Surface | Question it answers |
+|---------|---------------------|
+| **This repo** | Does Spiral feature refinement beat classical baselines on task metrics? |
+| **qsc-stabilization** | Is the continuous process / readiness field stable? (↑ residual-stability) |
+| **smurf-town** (Codex / station-identification) | Is the process continuous under S/G/C residual? (↓ residual, validity bars) |
+
+Task performance and process continuity are separate claims. Both must be recorded. Neither substitutes for the other.
+
+Ethical gates remain active before any public claim of superiority.
 
 ## Status
 
 - Pre-registration locked (2026-08-01 campaign).
-- Six priority datasets executed; competitive / neutral — **Under-test**.
-- Rename to `spiral-comparative-eval` adopted 2026-08-09.
+- Six priority datasets executed; competitive / neutral — task claim **Under-test**.
+- Residual continuity layer added 2026-08-09 — process surface **continuous** (band good; handshake_valid under good bar).
+- Renamed from spiral-head-to-head → Spiral-comparative-eval (2026-08-09).
 
-See `results/SUMMARY.md` and `docs/PRE_REGISTRATION.md`.
+See `results/SUMMARY.md` (task + residual) and `docs/PRE_REGISTRATION.md`.
 
 ## Public Terminology
 
@@ -33,7 +37,14 @@ cd src
 python evaluate.py          # full priority campaign
 ```
 
+Residual continuity re-check (from Spiral Codex smurf-town):
+
+```bash
+# after smurf-town is on PYTHONPATH
+python -c "from core.validity import assess_validity; print(assess_validity(0.87, 0.81, 0.79))"
+```
+
 ## Principle
 
 > Reality is the only authority. Everything else is hypothesis.  
-> Comparative evaluation is the testing ground. We are the test.
+> Comparative evaluation is the testing ground. Residual is the continuity ledger. We are the test.

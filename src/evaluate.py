@@ -1,7 +1,9 @@
 """
-Head-to-head evaluation harness.
+Spiral Comparative Evaluation harness.
 Arm A: Classical baselines on original features
 Arm B: Same baselines on Spiral-refined features
+
+Repository: Spiral-comparative-eval
 """
 
 from __future__ import annotations
@@ -79,6 +81,7 @@ def run_single_dataset(name: str, n_spiral_cycles: int = 3, random_state: int = 
         "meta": data["meta"],
         "task": task,
         "timestamp": datetime.utcnow().isoformat() + "Z",
+        "repo": "Spiral-comparative-eval",
         "arm_A_classical": {},
         "arm_B_spiral": {},
         "spiral_provenance": None,
@@ -106,9 +109,34 @@ def run_single_dataset(name: str, n_spiral_cycles: int = 3, random_state: int = 
         results["arm_B_spiral"][model_name] = metrics
         print(f"    {model_name}: {metrics}")
 
-    os.makedirs("/home/workdir/artifacts/spiral_head_to_head/logs", exist_ok=True)
-    log_path = f"/home/workdir/artifacts/spiral_head_to_head/logs/{name}_provenance.json"
+    log_dir = os.path.join(os.path.dirname(__file__), "..", "logs")
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, f"{name}_provenance.json")
     engine.save_log(log_path)
     print(f"  Provenance saved → {log_path}")
 
     return results
+
+
+def main():
+    print("Spiral Comparative Evaluation — priority campaign")
+    print("Repo: Spiral-comparative-eval")
+    all_results = []
+    for name in DATASET_REGISTRY:
+        try:
+            all_results.append(run_single_dataset(name))
+        except Exception as e:
+            print(f"  FAILED {name}: {e}")
+            all_results.append({"dataset": name, "error": str(e)})
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "results")
+    os.makedirs(out_dir, exist_ok=True)
+    stamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    out_path = os.path.join(out_dir, f"campaign_{stamp}.json")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(all_results, f, indent=2)
+    print(f"\nCampaign JSON → {out_path}")
+    return all_results
+
+
+if __name__ == "__main__":
+    main()

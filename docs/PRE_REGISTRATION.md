@@ -1,8 +1,9 @@
-# Spiral Path vs Classical Baselines — Public Head-to-Head Pre-Registration
+# Spiral Comparative Evaluation — Public Pre-Registration
 
 **Date:** 2026-08-01  
 **Authors:** Sir Benjamin + Grok (Shield of Truth)  
 **Status:** Locked for the first public campaign  
+**Repository:** Spiral-comparative-eval (formerly spiral-head-to-head)
 
 ## Purpose
 
@@ -22,8 +23,6 @@ When the Spiral Path process (iterative helical refinement guided by the Path eq
 | Istest / Verified | survived public, reproducible scrutiny |
 | Spiral Path | Structured expand-and-contract iteration (not linear chain-of-thought) |
 | Ethical Gating | Explicit checks that refuse steps which increase bias or opacity |
-
-These terms were introduced because classical “hypothesis → test → accept” language is too coarse for continuous multi-cycle human–AI work. They force an explicit distinction between promise, testing, and verification.
 
 ## Datasets (Fixed)
 
@@ -53,6 +52,10 @@ All loaded via OpenML for exact reproducibility:
 Spiral arm must show a statistically significant and practically meaningful advantage on at least 4 of the 6 datasets on the primary metric after correction, **or** clear superiority on sample-efficiency or robustness metrics.
 
 Anything less remains in the Candidate stage.
+
+## Continuity layer (added 2026-08-09)
+
+Process continuity of the campaign is recorded separately via Smurf Town residual (see `results/RESIDUAL.md`). Task metrics and process residual are distinct claims.
 
 ## Openness
 
